@@ -1,0 +1,54 @@
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 45%;
+    text-align: center;
+}
+
+.overlay h2{
+    margin-bottom: 8px;
+    font-size: 2.25rem;
+    font-weight: 100px;
+}
+
+.mui-1puvzpy-MuiButtonBase-root-MuiButton-root{
+    background-color: #f50 !important;
+} 
+
+/* Additional media queries for responsiveness */
+@media (max-width: 768px) {
+    .overlay h2 {
+        font-size: 1.1rem; /* Adjust font size for smaller screens */
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .overlay p{
+        display: none;
+    }
+    .mui-1puvzpy-MuiButtonBase-root-MuiButton-root{
+        font-size: 0.5rem !important;
+    } 
+}
+
+@media (max-width: 576px) {
+    .overlay h2 {
+        font-size: 1.1rem; /* Further adjust font size for even smaller screens */
+    }
+    .overlay p{
+        display: none;
+    }
+    .mui-1puvzpy-MuiButtonBase-root-MuiButton-root{
+        font-size: 0.5rem !important;
+    } 
+}
+
+
+
+.imageBanner{
+    width: 100%;
+    height: auto;
+}

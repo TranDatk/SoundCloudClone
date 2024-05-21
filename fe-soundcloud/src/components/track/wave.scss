@@ -1,0 +1,62 @@
+  .wave-form {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .hover-wave {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    pointer-events: none;
+    height: 100%;
+    width: 0;
+    mix-blend-mode: overlay;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .wave-form:hover .hover-wave {
+    opacity: 1;
+  }
+  
+  .time,
+  .duration {
+    position: absolute;
+    z-index: 11;
+    top: 50%;
+    margin-top: 10px;
+    transform: translateY(-50%);
+    font-size: 11px;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 2px;
+    color: #ddd;
+  }
+  .time {
+    left: 0;
+  }
+  .duration {
+    right: 0;
+  }
+
+  .overlay-wave{
+    position: absolute;
+    height: 30px;
+    width: 100%;
+    bottom: 0;
+    backdrop-filter: brightness(0.5);
+  }
+
+  .comments{
+    position: relative;
+  }
+
+  .img-comments{
+    height: 20px;
+    width: 20px;
+    top: 70px;
+    position: absolute;
+    z-index: 20;
+    border-radius: 50%;
+  }

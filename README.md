@@ -1,12 +1,12 @@
 # Project Title: Music Streaming Web - SoundCloud
 
-## Author: Diệu Xuân - Student
+## Author: Tran Nhat Minh Dat
 
 ---
 
 ### Introduction
 
-This is a web project developed by student Diệu Xuân with the aim of creating a music streaming application similar to SoundCloud. This project is built using Django (Backend) and Next.js (Frontend).
+This is a web project developed by Tran Dat with the aim of creating a music streaming application similar to SoundCloud. This project is built using Django (Backend) and Next.js (Frontend).
 
 ### Installation
 
@@ -44,9 +44,9 @@ This is a web project developed by student Diệu Xuân with the aim of creating
 
 If you have any questions or suggestions, please feel free to contact:
 
-- **Diệu Xuân**
-- Email: [example@example.com](mailto:example@example.com)
-- Github: [github.com/dieuxuan](https://github.com/dieuxuan)
+- **Tran Dat**
+- Email: [trannhatminhdat1103@gmail.com](mailto:trannhatminhdat1103@gmail.com)
+- Github: [github.com/trandatk](https://github.com/TranDatK)
 
 ---
 

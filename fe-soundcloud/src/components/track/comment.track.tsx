@@ -42,8 +42,8 @@ const CommentTrack = (props: IProps) => {
             body: {
                 comment_text: yourComment,
                 moment: Math.round(wavesurfer?.getCurrentTime() ?? 0),
-                fk_tracks: track?.id,
-                fk_user: session?.user.id ?? session?.user.pk
+                fk_tracks: track?._id,
+                user: session?.user._id
             },
 
             headers: {
@@ -51,7 +51,7 @@ const CommentTrack = (props: IProps) => {
             },
 
         })
-        if (res.results) {
+        if (res?.data) {
             setYourComment("");
             router.refresh()
         }
@@ -82,35 +82,35 @@ const CommentTrack = (props: IProps) => {
                     />
                 }
             </div>
-            {/* {`${process.env.NEXT_PUBLIC_BACKEND_URL}${track?.fk_user.avatar}`} */}
+            {/* {`${process.env.NEXT_PUBLIC_BACKEND_URL}${track?.user.avatar}`} */}
             <div style={{ display: "flex", gap: "10px" }}>
                 <div className='left' style={{ width: "190px", display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <img
                         style={{
                             height: 150, width: 150, borderRadius: "50%"
                         }}
-                        src={track?.fk_user.avatar !== "" && track?.fk_user.avatar !== null && track?.fk_user.avatar !== undefined ?
-                            `${process.env.NEXT_PUBLIC_BACKEND_URL}${track?.fk_user.avatar}` :
+                        src={track?.user.avatar !== "" && track?.user.avatar !== null && track?.user.avatar !== undefined ?
+                            `${process.env.NEXT_PUBLIC_BACKEND_URL}${track?.user.avatar}` :
                             "/avatars-000184820148-9xr49w-t240x240.jpg"}
                     />
-                    <h3>{track?.fk_user.username}</h3>
+                    <h3>{session?.user?.email}</h3>
                 </div>
                 <div className='right' style={{ width: "calc(100% - 200px)" }}>
                     {comments?.map(comment => {
                         return (
-                            <Box key={comment.id} sx={{ display: "flex", gap: "10px", justifyContent: "space-between" }}>
+                            <Box key={comment._id} sx={{ display: "flex", gap: "10px", justifyContent: "space-between" }}>
                                 <Box sx={{ display: "flex", gap: "10px", marginBottom: "25px", alignItems: "center" }}>
                                     <img
                                         style={{
                                             height: 40, width: 40, borderRadius: "50%"
 
                                         }}
-                                        src={comment?.fk_user.avatar !== "" && comment?.fk_user.avatar !== null && comment?.fk_user.avatar !== undefined ?
-                                            `${process.env.NEXT_PUBLIC_BACKEND_URL}${comment?.fk_user.avatar}` :
+                                        src={comment?.user.avatar !== "" && comment?.user.avatar !== null && comment?.user.avatar !== undefined ?
+                                            `${process.env.NEXT_PUBLIC_BACKEND_URL}${comment?.user.avatar}` :
                                             "/avatars-000184820148-9xr49w-t240x240.jpg"}
                                     />
                                     <div>
-                                        <div style={{ fontSize: "13px" }}>{comment?.fk_user.username ?? comment?.fk_user.email} at
+                                        <div style={{ fontSize: "13px" }}>{comment?.user.username ?? comment?.user.email} at
                                             <span style={{ cursor: "pointer" }}
                                                 onClick={() => handleJumpTrack(comment.moment)}
                                             >

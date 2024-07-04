@@ -65,7 +65,7 @@ const AddPlaylistTrack = (props: IProps) => {
         }
 
 
-        const chosenPlaylist = playlists.find(i => i.id === playlistId);
+        const chosenPlaylist = playlists.find(i => i._id === playlistId);
         let tracks = tracksId?.map(item => item?.split("###")?.[1]);
 
         //remove null/undefined/empty
@@ -75,7 +75,7 @@ const AddPlaylistTrack = (props: IProps) => {
                 url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/playlisttracks/`,
                 method: "POST",
                 body: {
-                    "id": chosenPlaylist.id,
+                    "id": chosenPlaylist._id,
                     "tracks": tracks
                 },
                 headers: {
@@ -118,7 +118,7 @@ const AddPlaylistTrack = (props: IProps) => {
                             >
                                 {playlists.map(item => {
                                     return (
-                                        <MenuItem key={item.id} value={item.id}>{item.title}</MenuItem>
+                                        <MenuItem key={item._id} value={item._id}>{item.title}</MenuItem>
                                     )
                                 })}
                             </Select>
@@ -147,9 +147,9 @@ const AddPlaylistTrack = (props: IProps) => {
                                 {tracks.map((track) => {
                                     return (
                                         <MenuItem
-                                            key={track.id}
-                                            value={`${track.title}###${track.id}`}
-                                            style={getStyles(`${track.title}###${track.id}`, tracksId, theme)}
+                                            key={track._id}
+                                            value={`${track.title}###${track._id}`}
+                                            style={getStyles(`${track.title}###${track._id}`, tracksId, theme)}
                                         >
                                             {track.title}
                                         </MenuItem>

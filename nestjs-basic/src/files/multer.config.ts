@@ -66,12 +66,12 @@ export class MulterConfigService implements MulterOptionsFactory {
                     }
                 },
                 filename: (req, file, cb) => {
-                    //get image extension
+                    // Get image extension
                     const extName = path.extname(file.originalname);
-                    //get image's name (without extension)
-                    const baseName = path.basename(file.originalname, extName);
-                    const finalName = `${baseName}-${Date.now()}${extName}`
-                    cb(null, finalName)
+                    // Get image's name (without extension) and remove spaces
+                    const baseName = path.basename(file.originalname, extName).replace(/\s+/g, '');
+                    const finalName = `${baseName}-${Date.now()}${extName}`;
+                    cb(null, finalName);
                 }
             })
         };

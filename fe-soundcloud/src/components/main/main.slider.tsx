@@ -123,11 +123,11 @@ const MainSlider = (props: IProps) => {
             <Slider {...settings}>
                 {Array.isArray(tracks) && tracks.map(track => {
                     return (
-                        <div className="track" key={track.id}>
+                        <div className="track" key={track._id}>
                             <Link
-                                href={`/track/${convertSlugUrl(track?.title)}-${track?.id}.html?tag=${track?.fk_genre.name}`}
+                                href={`/track/${convertSlugUrl(track?.title)}-${track?._id}.html?tag=${track?.genre.name}`}
                                 style={{ textDecoration: 'none', color: 'inherit' }}>
-                                <img src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/static/${track?.photo}`} alt="track" />
+                                <img src={`${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${track?.photo}`} alt="track" />
                                 <h4>{track.title}</h4>
                             </Link>
                         </div>

@@ -5,53 +5,53 @@ export { };
 
 declare global {
     interface IGenre {
-        id: number;
+        _id: string;
         name: string;
         description: string;
     }
 
-    interface Itembase{
-        id: number;
+    interface Itembase {
+        _id: string;
     }
 
 
-    interface backendResponse{
-        access : string;
-        refresh : string;
+    interface backendResponse {
+        access: string;
+        refresh: string;
         user: IUser;
     }
 
-    interface ITrack extends Itembase{
-        fk_genre: IGenre;
-        fk_user: IUser;
+    interface ITrack extends Itembase {
+        genre: IGenre;
+        user: IUser;
         description: string;
         photo: string;
-        title:string;
+        title: string;
         url: string;
-        like:number;
-        view:number;
+        like: number;
+        view: number;
     }
 
-    interface IComment extends Itembase{
+    interface IComment extends Itembase {
         comment_text: string;
         moment: number;
-        fk_user: IUser;
+        user: IUser;
         fk_tracks: ITrack;
         created_date: string;
     }
 
-    interface ILike extends Itembase{
+    interface ILike extends Itembase {
         like: boolean;
-        fk_user: IUser;
-        fk_tracks: ITrack;
+        user: IUser;
+        track: ITrack;
     }
 
-    interface IPlaylist extends Itembase{
+    interface IPlaylist extends Itembase {
         title: string;
         description: string;
         status: boolean;
         tracks: ITrack[];
-        fk_user: IUser;
+        user: IUser;
     }
 
     interface IRequest {
@@ -68,7 +68,7 @@ declare global {
         error?: string | string[];
         message: string;
         statusCode: number | string;
-        results?: T;
+        data?: T;
     }
 
 
@@ -82,11 +82,11 @@ declare global {
         result: T[]
     }
 
-    interface IShareTrack extends ITrack{
-        isPlaying : boolean;
+    interface IShareTrack extends ITrack {
+        isPlaying: boolean;
     }
 
-    interface ITrackContext{
+    interface ITrackContext {
         currentTrack: IShareTrack;
         setCurrentTrack: (track: IShareTrack) => void;
     }

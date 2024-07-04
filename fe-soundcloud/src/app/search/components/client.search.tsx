@@ -22,8 +22,8 @@ const ClientSearch = () => {
                 keyword: query
             }
         })
-        if (res.results) {
-            setTracks(res.results)
+        if (res.data) {
+            setTracks(res.data)
         }
     }
 
@@ -49,19 +49,19 @@ const ClientSearch = () => {
                     <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                         {tracks.map((track) => {
                             return (
-                                <div key={track.id}>
+                                <div key={track._id}>
                                     <Box sx={{ display: "flex", width: "100%", gap: "20px" }}>
                                         <Image
                                             style={{ borderRadius: "3px" }}
                                             alt="avatar track"
-                                            src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/static/${track?.photo}`}
+                                            src={`${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${track?.photo}`}
                                             height={50}
                                             width={50}
                                         />
                                         <Typography sx={{ py: 2 }}>
                                             <Link
                                                 style={{ textDecoration: "none", color: "unset" }}
-                                                href={`/track/${convertSlugUrl(track.title)}-${track.id}.html?audio=${track.title}`}
+                                                href={`/track/${convertSlugUrl(track.title)}-${track._id}.html?audio=${track.title}`}
                                             >
                                                 {track.title}
                                             </Link>

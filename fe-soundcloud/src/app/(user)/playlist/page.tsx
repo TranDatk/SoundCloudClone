@@ -64,7 +64,7 @@ const PlaylistPage = async ({ searchParams, }: { searchParams: { [key: string]: 
             <Box sx={{ mt: 3 }}>
                 {playlists?.map(playlist => {
                     return (
-                        <Accordion key={playlist.id}>
+                        <Accordion key={playlist._id}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}>
                                 <Box sx={{ flexDirection: 'column', paddingLeft: "0 !important" }}>
@@ -75,7 +75,7 @@ const PlaylistPage = async ({ searchParams, }: { searchParams: { [key: string]: 
                             <AccordionDetails>
                                 {playlist?.tracks?.map((track: ITrack, index: number) => {
                                     return (
-                                        <Fragment key={track.id}>
+                                        <Fragment key={track._id}>
                                             {index === 0 && <Divider />}
                                             <CurrentTrack track={track} />
                                             <Divider />

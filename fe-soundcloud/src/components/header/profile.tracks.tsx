@@ -30,7 +30,7 @@ const ProfileTracks = (props: IProps) => {
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <CardContent sx={{ flex: '1 0 auto' }}>
                     <Link
-                        href={`/track/${convertSlugUrl(data?.title)}-${data?.id}.html?tag=${data?.fk_genre.name}`}
+                        href={`/track/${convertSlugUrl(data?.title)}-${data?._id}.html?tag=${data?.genre.name}`}
                         style={{ textDecoration: 'none', color: 'black' }}>
                         <Typography component="div" variant="h5">
                             {data.title}
@@ -46,14 +46,14 @@ const ProfileTracks = (props: IProps) => {
                     </IconButton>
                     <IconButton
                         onClick={() => {
-                            if (data.id !== currentTrack.id && currentTrack.isPlaying) {
+                            if (data._id !== currentTrack._id && currentTrack.isPlaying) {
                                 setCurrentTrack({ ...data, isPlaying: currentTrack.isPlaying })
                             } else {
                                 setCurrentTrack({ ...data, isPlaying: !currentTrack.isPlaying })
                             }
                         }}
                         aria-label="play/pause">
-                        {currentTrack.isPlaying && data.id === currentTrack.id ?
+                        {currentTrack.isPlaying && data._id === currentTrack._id ?
                             (<PauseIcon sx={{ height: 38, width: 38 }} />) :
                             (<PlayArrowIcon sx={{ height: 38, width: 38 }} />)
                         }
@@ -66,7 +66,7 @@ const ProfileTracks = (props: IProps) => {
             <CardMedia
                 component="img"
                 sx={{ width: 151 }}
-                image={`${process.env.NEXT_PUBLIC_BACKEND_URL}/static/${data.photo}`}
+                image={`${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${data.photo}`}
                 alt="Live from space album cover"
             />
         </Card>

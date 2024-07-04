@@ -11,29 +11,30 @@ export default async function HomePage() {
   const session = await getServerSession(authOptions);
 
   const resPop = await sendRequest<IBackendRes<ITrack[]>>({
-    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/tracks/top/`,
+    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}tracks/top?limit=6`,
     method: "POST",
-    body: { genre: "pop" }
+    body: { genre: "POP" }
   })
 
-  const resChill = await sendRequest<IBackendRes<ITrack[]>>({
-    url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/tracks/top/`,
-    method: "POST",
-    body: { genre: "chill" }
-  })
+
+  // const resChill = await sendRequest<IBackendRes<ITrack[]>>({
+  //   url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/tracks/top/`,
+  //   method: "POST",
+  //   body: { genre: "chill" }
+  // })
 
   return (
     <Container>
       <HeadBanner />
       <MainSlider
-        tracks={resPop?.results ?? []}
+        tracks={resPop?.data ?? []}
         title="Top Pop Tracks"
       />
       <Divider />
-      <MainSlider
+      {/* <MainSlider
         tracks={resChill?.results ?? []}
         title="Top Chill Tracks"
-      />
+      /> */}
     </Container>
   );
 }

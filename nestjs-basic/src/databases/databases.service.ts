@@ -6,7 +6,7 @@ import { Permission, PermissionDocument } from 'src/permissions/schemas/permissi
 import { Role, RoleDocument } from 'src/roles/schemas/role.schema';
 import { User, UserDocument } from 'src/users/schemas/user.schema';
 import { UsersService } from 'src/users/users.service';
-import { ADMIN_ROLE, INIT_GENRES, INIT_PERMISSIONS, USER_ROLE } from './init-data';
+import { ADMIN_ROLE, INIT_GENRES, INIT_PERMISSIONS, INIT_TRACKS, USER_ROLE } from './init-data';
 import { Genre, GenreDocument } from 'src/genres/schemas/genre.schemas';
 import { Track, TrackDocument } from 'src/tracks/schemas/track.schema';
 
@@ -40,6 +40,14 @@ export class DatabasesService implements OnModuleInit {
 
             if (roleQuantity === 0) {
                 const permissions = await this.permissionModel.find({}).select("_id");
+                const permissionsUser = await this.permissionModel.find({
+                    $or: [
+                        { apiPath: '/api/v1/likes', method: 'POST' },
+                        { apiPath: '/api/v1/likes/check/:id', method: 'GET' },
+                    ]
+
+                }).select("_id");
+
                 await this.roleModel.insertMany([
                     {
                         name: ADMIN_ROLE,
@@ -51,7 +59,7 @@ export class DatabasesService implements OnModuleInit {
                         name: USER_ROLE,
                         description: 'The users use the web',
                         isActive: true,
-                        permissions: []
+                        permissions: permissionsUser
                     }
                 ])
             }
@@ -61,6 +69,7 @@ export class DatabasesService implements OnModuleInit {
                 const userRole = await this.roleModel.findOne({ name: USER_ROLE });
                 await this.userModel.insertMany([
                     {
+                        _id: "6684c50ca995464eae29594b",
                         name: "I'm admin",
                         email: "admin@gmail.com",
                         password: this.userService.getHashPassword(this.configService.get<string>('INIT_PASSWORD')),
@@ -97,7 +106,11 @@ export class DatabasesService implements OnModuleInit {
                 await this.genreModel.insertMany(INIT_GENRES);
             }
 
-            if (userQuantity > 0 && roleQuantity > 0 && permissionQuantity > 0 && genreQuantity > 0) {
+            if (trackQuantity === 0) {
+                await this.trackModel.insertMany(INIT_TRACKS);
+            }
+
+            if (userQuantity > 0 && roleQuantity > 0 && permissionQuantity > 0 && genreQuantity > 0 && trackQuantity > 0) {
                 this.logger.log(">>> ALREADY INIT DATA...");
             }
         }

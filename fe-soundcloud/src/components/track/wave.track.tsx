@@ -183,7 +183,7 @@ const WaveTrack = (props: IProps) => {
     }, [currentTrack])
 
     useEffect(() => {
-        if (track?.id && !currentTrack?.id)
+        if (track?._id && !currentTrack?._id)
             setCurrentTrack({ ...track, isPlaying: false })
     }, [track])
 
@@ -193,13 +193,13 @@ const WaveTrack = (props: IProps) => {
                 url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/tracks/increase-view/`,
                 method: "POST",
                 body: {
-                    track_id: track?.id,
+                    track_id: track?._id,
                 },
                 headers: {
                     Authorization: `Bearer ${session?.access_token}`,
                 },
             })
-            if (res?.results) {
+            if (res?.data) {
                 setFirstTimeOnPage(false);
                 await sendRequest<IBackendRes<any>>({
                     url: `/api/revalidate`,
@@ -286,7 +286,7 @@ const WaveTrack = (props: IProps) => {
                                     color: "white"
                                 }}
                                 >
-                                    {track.fk_user.username}
+                                    {track.user.username}
                                 </div>
                             </div>
                         </div>
@@ -298,17 +298,17 @@ const WaveTrack = (props: IProps) => {
                                 {
                                     isReady && comments.map((comment) => {
                                         return (
-                                            <Tooltip key={`id=${comment.id}`} title={comment.comment_text} arrow>
+                                            <Tooltip key={`id=${comment._id}`} title={comment.comment_text} arrow>
                                                 <img
                                                     className={`${isReady && 'img-comments'}`}
                                                     onPointerMove={(e) => {
                                                         const hover = hoverRef.current;
                                                         hover ? hover.style.width = calLeft(comment.moment + 3) : null;
                                                     }}
-                                                    key={`id_img=${comment.id}`}
-                                                    src={comment.fk_user.avatar !== '' && comment.fk_user.avatar !== null ?
-                                                        `${process.env.NEXT_PUBLIC_BACKEND_URL}${comment.fk_user.avatar}` :
-                                                        "/avatars-000184820148-9xr49w-t240x240.jpg"}
+                                                    key={`id_img=${comment._id}`}
+                                                    src={comment.user.avatar !== '' && comment.user.avatar !== null ?
+                                                        `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${comment.user.avatar}` :
+                                                        "avatars-000184820148-9xr49w-t240x240.jpg"}
                                                     alt="sa"
                                                     style={{
                                                         left: calLeft(comment.moment)
@@ -332,7 +332,7 @@ const WaveTrack = (props: IProps) => {
                     >
                         {
                             track?.photo ? (<img
-                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/static/${track?.photo}`}
+                                src={`${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${track?.photo}`}
                                 width={230}
                                 height={230}
                                 alt={"track"}

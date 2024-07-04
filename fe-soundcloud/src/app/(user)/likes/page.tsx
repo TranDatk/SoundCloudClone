@@ -29,7 +29,7 @@ const LikePage = async () => {
         }
     })
 
-    const likes = res.results ?? [];
+    const likes = res.data ?? [];
 
     return (
         <Container>
@@ -40,18 +40,18 @@ const LikePage = async () => {
             <Box sx={{ mt: 3, display: "flex", gap: "20px", flexWrap: "wrap" }}>
                 {likes.map(track => {
                     return (
-                        <Box key={track.id}>
-                            <Image
+                        <Box key={track._id}>
+                            <img
                                 style={{ borderRadius: "3px" }}
                                 alt="avatar track"
-                                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/static${track?.photo}`}
+                                src={`${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${track?.photo}`}
                                 height={200}
                                 width={200}
                             />
                             <div>
                                 <Link
                                     style={{ textDecoration: "none", color: "unset" }}
-                                    href={`/track/${convertSlugUrl(track.title)}-${track.id}.html?audio=${track.title}`}
+                                    href={`/track/${convertSlugUrl(track.title)}-${track._id}.html?audio=${track.title}`}
                                 >
                                     <span
                                         style={{

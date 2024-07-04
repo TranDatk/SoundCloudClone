@@ -46,7 +46,7 @@ function LinearWithValueLabel(trackUpload: {
     trackUpload: {
         fileName: string;
         percent: number;
-        id: number;
+        _id: string;
     }
 }) {
 
@@ -73,14 +73,14 @@ interface IProps {
     trackUpload: {
         fileName: string;
         percent: number;
-        id: number;
+        _id: string;
     },
     genres: IGenre[],
     setValue: (v: number) => void;
 }
 
 interface INewTrack {
-    fk_genre: string;
+    genre: string;
     description: string;
     photo: string;
     title: string;
@@ -95,7 +95,7 @@ const Step2 = (props: IProps) => {
     const [fileSelected, setFileSelected] = React.useState<File | null>(null);
     const { data: session } = useSession();
     const [infor, setInfor] = useState<INewTrack>({
-        fk_genre: "",
+        genre: "",
         description: "",
         photo: "",
         title: "",
@@ -111,7 +111,7 @@ const Step2 = (props: IProps) => {
             error: false,
             errorMessage: 'Mô tả không được để trống'
         },
-        fk_genre: {
+        genre: {
             error: false,
             errorMessage: 'Thể loại chưa được chọn'
         },
@@ -126,8 +126,8 @@ const Step2 = (props: IProps) => {
                     const formData = new FormData();
                     setFileSelected(file);
                     formData.append("photo", file, file.name);
-                    formData.append("id", trackUpload.id.toString())
-                    if (trackUpload.id !== 0) {
+                    formData.append("id", trackUpload._id.toString())
+                    if (trackUpload._id !== null) {
                         handleFileUpload(formData);
                     } else {
                         toast.error("Vui lòng đợi quá trình tải âm thanh hoàn thành")
@@ -192,13 +192,13 @@ const Step2 = (props: IProps) => {
         } else if (trackUpload.percent !== 100) {
             toast.error("Quá trình tải âm thanh chưa hoàn tất, vui lòng đợi trong giây lát");
             return;
-        } else if (infor.fk_genre === '') {
+        } else if (infor.genre === '') {
             toast.error("Thể loại chưa được lựa chọn");
             const newErrorState = {
                 ...error,
-                fk_genre: {
+                genre: {
                     error: true,
-                    errorMessage: error.fk_genre.errorMessage
+                    errorMessage: error.genre.errorMessage
                 }
             };
             setError(newErrorState);
@@ -215,10 +215,10 @@ const Step2 = (props: IProps) => {
                 'Authorization': `Bearer ${session?.access_token}`,
             },
             body: {
-                id: trackUpload.id,
+                id: trackUpload._id,
                 title: infor.title,
                 description: infor.description,
-                fk_genre: infor.fk_genre,
+                genre: infor.genre,
             }
         })
         if (resPop.error) {
@@ -260,7 +260,7 @@ const Step2 = (props: IProps) => {
                     <div style={{ height: 250, width: 250, background: "#ccc" }}>
                         {infor.photo !== '' && (
                             <Image
-                                src={process.env.NEXT_PUBLIC_BACKEND_URL_IMAGE + (infor.photo).substring(1) || ""}
+                                src={process.env.NEXT_PUBLIC_BACKEND_PUBLIC + (infor.photo).substring(1) || ""}
                                 width={250}
                                 height={250}
                                 alt={infor.title}
@@ -332,26 +332,26 @@ const Step2 = (props: IProps) => {
                         label="Genre"
                         fullWidth
                         variant="standard"
-                        value={infor?.fk_genre ?? ""}
-                        error={error.fk_genre.error}
-                        helperText={error.fk_genre.error ? error.fk_genre.errorMessage : ''}
+                        value={infor?.genre ?? ""}
+                        error={error.genre.error}
+                        helperText={error.genre.error ? error.genre.errorMessage : ''}
                         onChange={(e) => {
                             const newErrorState = {
                                 ...error,
-                                fk_genre: {
+                                genre: {
                                     error: e.target.value ? false : true,
-                                    errorMessage: error.fk_genre.errorMessage
+                                    errorMessage: error.genre.errorMessage
                                 }
                             };
                             setError(newErrorState);
                             setInfor({
                                 ...infor,
-                                fk_genre: e.target.value
+                                genre: e.target.value
                             })
                         }}
                     >
                         {genres.map((genre) => (
-                            <MenuItem key={genre.id} value={genre.id}>
+                            <MenuItem key={genre._id} value={genre._id}>
                                 {genre.name}
                             </MenuItem>
                         ))}

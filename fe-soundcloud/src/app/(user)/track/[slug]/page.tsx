@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 }
 
 const DetailTrackPage = async ({ params }: { params: { slug: string } }) => {
-    const id = getIdFromUrl(params.slug)
+    const id = getIdFromUrl(params.slug);
     const res = await sendRequest<IBackendRes<ITrack>>({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/tracks/${id}/`,
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}tracks/${id}/`,
         method: "GET",
         nextOption: { next: { tags: ['track-by-id'] } }
     })
@@ -32,11 +32,11 @@ const DetailTrackPage = async ({ params }: { params: { slug: string } }) => {
 
     return (
         <Container>
-            {res.results && (
+            {res.data && (
                 <WaveTrack
                     id={id}
-                    track={res.results}
-                    comments={resComments.results?.reverse() ?? []} />
+                    track={res.data}
+                    comments={resComments.data?.reverse() ?? []} />
             )}
         </Container>
     )

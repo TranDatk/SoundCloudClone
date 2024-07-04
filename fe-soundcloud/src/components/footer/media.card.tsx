@@ -17,9 +17,9 @@ interface IProp {
 
 function constructPhotoUrl(track: ITrack): string {
     if (track.photo.startsWith("/")) {
-        return `${process.env.NEXT_PUBLIC_BACKEND_URL}/static${track.photo}`;
+        return `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${track.photo}`;
     } else {
-        return `${process.env.NEXT_PUBLIC_BACKEND_URL}/static/${track.photo}`;
+        return `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${track.photo}`;
     }
 }
 
@@ -28,10 +28,10 @@ export default function MediaControlCard(props: IProp) {
     const theme = useTheme();
 
     return (
-        track.id !== 0 && (
+        track._id !== null && (
             <Box sx={{ display: 'flex', alignItems: 'center', height: '30px', width: '100%', background: 'none' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', marginRight: '8px', width: '15%' }}>
-                    <Image
+                    <img
                         style={{ alignSelf: 'center' }}
                         src={constructPhotoUrl(track)}
                         alt=""
@@ -51,7 +51,7 @@ export default function MediaControlCard(props: IProp) {
                         {track.title}
                     </Typography>
                     <Typography sx={{ height: 15, fontSize: '0.8rem' }} color="text.secondary">
-                        {track.fk_user.username}
+                        {track.user.username}
                     </Typography>
                 </Box>
             </Box>)

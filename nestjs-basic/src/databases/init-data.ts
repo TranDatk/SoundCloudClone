@@ -417,7 +417,67 @@ export const INIT_PERMISSIONS = [
         "createdAt": "2023-06-15T09:12:51.974Z",
         "updatedAt": "2023-06-15T09:12:51.974Z",
         "__v": 0
-    }
+    },
+    {
+        "name": "Check like",
+        "apiPath": "/api/v1/likes/check/:id",
+        "method": "GET",
+        "module": "LIKES",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2023-06-15T06:59:31.898Z",
+        "updatedAt": "2023-06-15T06:59:31.898Z",
+        "__v": 0
+    },
+    {
+        "name": "Fetch like by id",
+        "apiPath": "/api/v1/likes/:id",
+        "method": "GET",
+        "module": "LIKES",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2023-06-15T06:59:31.898Z",
+        "updatedAt": "2023-06-15T06:59:31.898Z",
+        "__v": 0
+    },
+    {
+        "name": "Update like by id",
+        "apiPath": "/api/v1/likes/:id",
+        "method": "PATCH",
+        "module": "LIKES",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2023-06-15T06:59:31.898Z",
+        "updatedAt": "2023-06-15T06:59:31.898Z",
+        "__v": 0
+    },
+    {
+        "name": "Create a like",
+        "apiPath": "/api/v1/likes",
+        "method": "POST",
+        "module": "LIKES",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2023-06-15T06:59:31.898Z",
+        "updatedAt": "2023-06-15T06:59:31.898Z",
+        "__v": 0
+    },
 ]
 
 export const INIT_GENRES = [
@@ -450,5 +510,134 @@ export const INIT_GENRES = [
         "createdAt": "2024-07-02T14:10:44.978Z",
         "updatedAt": "2024-07-02T14:10:44.978Z",
         "__v": 0
+    }
+]
+
+export const INIT_TRACKS = [
+    {
+        "_id": "6684189971843975cf6b45df",
+        "title": "Chạm Khẽ Tim Anh Một Chút Thôi",
+        "description": "...",
+        "photo": "ChạmKhẽTimAnhMộtChútThôi-NooPhướcThịnh-1719931876123.jpg",
+        "url": "ChạmKhẽTimAnhMộtChútThôi-NooPhướcThịnh-1719932984950.mp3",
+        "user": "6684c50ca995464eae29594b",
+        "genre": "66840a64602571c17bbb2f74",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com",
+            "name": "I'm admin"
+        },
+        "view": 6,
+        "like": 0,
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2024-07-02T15:11:21.511Z",
+        "updatedAt": "2024-07-02T15:11:21.511Z",
+        "__v": 0
+    },
+    {
+        "_id": "6684fe9ac52d5614696bd9ab",
+        "title": "Chiec Khan Gio Am - Tien Cookie",
+        "description": "...",
+        "photo": "chieckhangioam-1719991828905.jpg",
+        "url": "ChiecKhanGioAm-TienCookie-1719991622856.mp3",
+        "user": "6684c50ca995464eae29594b",
+        "genre": "66840a64602571c17bbb2f74",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com",
+            "name": "I'm admin"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2024-07-03T07:32:42.415Z",
+        "updatedAt": "2024-07-03T07:32:42.415Z",
+        "__v": 0,
+        "view": 5,
+        "like": 0
+    },
+    {
+        "_id": "66850079c52d5614696bd9ba",
+        "title": "Nắm Đôi Bàn Tay - Kay Trần",
+        "description": "...",
+        "photo": "namlaydoibantay-1719992176783.jpg",
+        "url": "NắmĐôiBànTay-KayTrần-1719992143451.mp3",
+        "user": "6684c50ca995464eae29594b",
+        "genre": "66840a64602571c17bbb2f74",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com",
+            "name": "I'm admin"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2024-07-03T07:40:41.968Z",
+        "updatedAt": "2024-07-03T07:40:41.968Z",
+        "__v": 0,
+        "like": 0,
+        "view": 4
+    },
+    {
+        "_id": "6685026ec52d5614696bd9c9",
+        "title": "Khi Người Mình Yêu Khóc - Phan Mạnh Quỳnh",
+        "description": "...",
+        "photo": "KhiNguoiYeuMinhKhoc-1719992815618.jpg",
+        "url": "KhiNgườiMìnhYêuKhóc-PhanMạnhQuỳnh-1719992745413.mp3",
+        "user": "6684c50ca995464eae29594b",
+        "genre": "66840a64602571c17bbb2f74",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com",
+            "name": "I'm admin"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2024-07-03T07:49:02.644Z",
+        "updatedAt": "2024-07-03T07:49:02.644Z",
+        "__v": 0,
+        "like": 0,
+        "view": 3
+    },
+    {
+        "_id": "66850447c52d5614696bd9d8",
+        "title": "Chạm Làn Môi Em - Andree, Hoàng Tôn, Tinle",
+        "description": "...",
+        "photo": "ChạmLànMôiEm-1719993221829.jpg",
+        "url": "ChạmLànMôiEm-Andree,HoàngTôn,Tinle-1719993154066.mp3",
+        "user": "6684c50ca995464eae29594b",
+        "genre": "66840a64602571c17bbb2f74",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com",
+            "name": "I'm admin"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2024-07-03T07:56:55.757Z",
+        "updatedAt": "2024-07-03T07:56:55.757Z",
+        "__v": 0,
+        "like": 0,
+        "view": 2
+    },
+    {
+        "_id": "66850559c52d5614696bd9e7",
+        "title": "Happy Ending - ERIK",
+        "description": "...",
+        "photo": "HappyEnding-1719993576124.jpg",
+        "url": "HappyEnding-ERIK-1719993592546.mp3",
+        "user": "6684c50ca995464eae29594b",
+        "genre": "66840a64602571c17bbb2f74",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com",
+            "name": "I'm admin"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2024-07-03T08:01:29.493Z",
+        "updatedAt": "2024-07-03T08:01:29.493Z",
+        "__v": 0,
+        "like": 0,
+        "view": 1
     }
 ]

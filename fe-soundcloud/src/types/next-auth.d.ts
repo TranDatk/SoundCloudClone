@@ -1,7 +1,7 @@
-import NextAuth, {DefaultSession} from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 
-interface IUser{
-    id: number;
+interface IUser {
+    _id: string;
     username: string;
     email: string;
     first_name: string;
@@ -11,7 +11,7 @@ interface IUser{
 }
 
 declare module "next-auth/jwt" {
-    interface JWT{
+    interface JWT {
         access_token: string;
         refresh_token: string;
         user: IUser;
@@ -21,7 +21,7 @@ declare module "next-auth/jwt" {
 }
 
 declare module "next-auth" {
-    interface Session{
+    interface Session {
         access_token: string;
         refresh_token: string;
         user: IUser;

@@ -10,9 +10,9 @@ import MediaControlCard from "./media.card";
 
 function constructUrl(track: ITrack): string {
     if (track.url.startsWith("/")) {
-        return `${process.env.NEXT_PUBLIC_BACKEND_URL}/static${track.url}`;
+        return `${process.env.NEXT_PUBLIC_BACKEND_URL}tracks/audio/${track?._id}`;
     } else {
-        return `${process.env.NEXT_PUBLIC_BACKEND_URL}/static/${track.url}`;
+        return `${process.env.NEXT_PUBLIC_BACKEND_URL}tracks/audio/${track?._id}`;
     }
 }
 
@@ -20,7 +20,6 @@ const AppFooter = () => {
     const hasMounted = useHasMounted();
     const playerRef = useRef(null)
     const { currentTrack, setCurrentTrack } = useTrackContext() as ITrackContext;
-
     useEffect(() => {
         if (currentTrack?.isPlaying === true) {
             //@ts-ignore
@@ -36,7 +35,7 @@ const AppFooter = () => {
     return (
         <>
             {
-                currentTrack.id !== 0 && (
+                currentTrack._id !== null && (
                     <div style={{ marginTop: 100 }}>
                         <AppBar
                             position="fixed"
@@ -53,7 +52,7 @@ const AppFooter = () => {
                                 <AudioPlayer
                                     ref={playerRef}
                                     layout="horizontal-reverse"
-                                    src={constructUrl(currentTrack)}
+                                    src={currentTrack?._id ? constructUrl(currentTrack) : ''}
                                     onPlay={() => {
                                         setCurrentTrack({ ...currentTrack, isPlaying: true });
                                     }}

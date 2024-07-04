@@ -121,7 +121,7 @@ export default function AppHeader() {
             onClose={handleMenuClose}
         >
             <MenuItem>
-                <Link href={`/profile/${session?.user?.id ?? session?.user?.pk}`}
+                <Link href={`/profile/${session?.user?._id ?? session?.user?.pk}`}
                     style={{
                         color: "unset",
                         textDecoration: "unset"
@@ -245,7 +245,7 @@ export default function AppHeader() {
                                         <ActiveLink href={"/track/upload"}>Upload</ActiveLink>
                                         <img
                                             src={session?.user?.avatar !== "" && session?.user?.avatar !== null && session?.user?.avatar !== undefined ?
-                                                `${process.env.NEXT_PUBLIC_BACKEND_URL}/static/${session?.user?.avatar}` :
+                                                `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${session?.user?.avatar}` :
                                                 "/avatars-000184820148-9xr49w-t240x240.jpg"}
                                             onClick={handleProfileMenuOpen}
                                             style={{ width: 40, height: 40, borderRadius: "50%" }} />

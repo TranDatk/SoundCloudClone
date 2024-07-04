@@ -14,23 +14,20 @@ interface IProps {
 const LikeTrack = (props: IProps) => {
     const { track } = props;
     const { data: session } = useSession();
-    const [like, setLike] = useState<ILike | null>(null);
+    const [like, setLike] = useState<boolean>(false);
     const router = useRouter();
 
     const fetchData = async () => {
         if (session?.access_token) {
             const res2 = await sendRequest<IBackendRes<ILike>>({
-                url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/like/liked-track/`,
-                method: "POST",
-                body: {
-                    fk_tracks: track?.id,
-                },
+                url: `${process.env.NEXT_PUBLIC_BACKEND_URL}likes/check/${track?._id}`,
+                method: "GET",
                 headers: {
                     Authorization: `Bearer ${session?.access_token}`,
                 },
             })
-            if (res2?.results) {
-                setLike(res2?.results)
+            if (res2?.data) {
+                setLike(res2?.data?.like)
             }
         }
     }
@@ -41,11 +38,11 @@ const LikeTrack = (props: IProps) => {
 
     const handleLikeTrack = async () => {
         await sendRequest<IBackendRes<ITrack>>({
-            url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/like/`,
+            url: `${process.env.NEXT_PUBLIC_BACKEND_URL}likes`,
             method: "POST",
             body: {
-                fk_tracks: track?.id,
-                like: !like?.like
+                track: track?._id,
+                like: !like
             },
             headers: {
                 Authorization: `Bearer ${session?.access_token}`,
@@ -78,7 +75,7 @@ const LikeTrack = (props: IProps) => {
                 sx={{ borderRadius: "5px" }}
                 size="medium"
                 variant="outlined"
-                color={like?.like ? "error" : "default"}
+                color={like ? "error" : "default"}
                 clickable
                 icon={<FavoriteIcon />} label="Like"
             />

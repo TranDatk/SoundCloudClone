@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Res } from '@nestjs/common';
 import { TracksService } from './tracks.service';
 import { CreateTrackDto } from './dto/create-track.dto';
 import { UpdateTrackDto } from './dto/update-track.dto';
 import { ResponseMessage } from 'src/custom-decorators/response-message-decorator';
 import { User } from 'src/custom-decorators/parsing-user-decorator';
 import { IUser } from 'src/users/users.interface';
+import { Public } from 'src/custom-decorators/is-public-decorator';
+import { Response } from 'express';
 
 @Controller('tracks')
 export class TracksController {
@@ -26,6 +28,17 @@ export class TracksController {
     return this.tracksService.findAll(+currentPage, +limit, qs);
   }
 
+  @Public()
+  @ResponseMessage('Fetch top track by genre')
+  @Post('/top')
+  findTopTrack(
+    @Query("limit") limit: string,
+    @Body("genre") genreName: string,
+  ) {
+    return this.tracksService.findTopTrackByGenre(+limit, genreName);
+  }
+
+  @Public()
   @ResponseMessage('Fetch track by id')
   @Get(':id')
   findOne(@Param('id') id: string) {
@@ -47,4 +60,14 @@ export class TracksController {
   remove(@Param('id') id: string, @User() user: IUser) {
     return this.tracksService.remove(id, user);
   }
+
+  @ResponseMessage('Get audio from id track')
+  @Public()
+  @Get('audio/:id')
+  async getAudioById(@Param('id') trackId: string, @Res() res: Response) {
+    const audioBuffer = await this.tracksService.getAudioById(trackId);
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.end(audioBuffer);
+  }
+
 }

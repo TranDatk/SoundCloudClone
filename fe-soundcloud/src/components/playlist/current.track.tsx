@@ -20,7 +20,7 @@ const CurrentTrack = (props: IProps) => {
             <Typography sx={{ py: 2 }}>
                 <Link
                     style={{ textDecoration: "none", color: "unset" }}
-                    href={`/track/${convertSlugUrl(track.title)}-${track.id}.html?audio=${track.url}`}
+                    href={`/track/${convertSlugUrl(track.title)}-${track._id}.html?audio=${track.url}`}
                 >
                     {track.title}
                 </Link>
@@ -28,8 +28,8 @@ const CurrentTrack = (props: IProps) => {
 
             <Box sx={{ display: "flex", "alignItems": "center" }}>
                 {
-                    (track.id !== currentTrack.id ||
-                        track.id === currentTrack.id && currentTrack.isPlaying === false
+                    (track._id !== currentTrack._id ||
+                        track._id === currentTrack._id && currentTrack.isPlaying === false
                     )
                     &&
                     <IconButton aria-label="play/pause"
@@ -41,7 +41,7 @@ const CurrentTrack = (props: IProps) => {
                     </IconButton>
                 }
 
-                {track.id === currentTrack.id && currentTrack.isPlaying === true
+                {track._id === currentTrack._id && currentTrack.isPlaying === true
                     &&
                     <IconButton aria-label="play/pause"
                         onClick={(e) => {

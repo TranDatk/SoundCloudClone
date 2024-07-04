@@ -14,12 +14,12 @@ interface IProps {
     setTrackUpload: React.Dispatch<React.SetStateAction<{
         fileName: string;
         percent: number;
-        id: number;
+        _id: string;
     }>>;
     trackUpload: {
         fileName: string;
         percent: number;
-        id: number;
+        _id: string;
     }
 }
 
@@ -55,7 +55,7 @@ const Step1 = (props: IProps) => {
                     if (res) {
                         props.setTrackUpload((prevState: any) => ({
                             ...prevState,
-                            id: res.data.results.id ?? 0
+                            id: res.data.results._id ?? 0
                         }));
                     }
                 } catch (error) {

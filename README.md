@@ -7,6 +7,8 @@
 ### Introduction
 
 This is a web project developed by Tran Dat with the aim of creating a music streaming application similar to SoundCloud. This project is built using Django (Backend) and Next.js (Frontend).
+---
+Demo project:  [https://fe-next-js-sound-cloud-clone.vercel.app/](https://fe-next-js-sound-cloud-clone.vercel.app/)
 
 ### Installation
 

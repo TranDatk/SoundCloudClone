@@ -17,6 +17,8 @@ import { HealthModule } from './health/health.module';
 import { TracksModule } from './tracks/tracks.module';
 import { GenresModule } from './genres/genres.module';
 import { LikesModule } from './likes/likes.module';
+import { CommentsModule } from './comments/comments.module';
+import { PlaylistsModule } from './playlists/playlists.module';
 
 @Module({
   imports: [
@@ -55,6 +57,8 @@ import { LikesModule } from './likes/likes.module';
     TracksModule,
     GenresModule,
     LikesModule,
+    CommentsModule,
+    PlaylistsModule,
   ],
 
   controllers: [AppController],

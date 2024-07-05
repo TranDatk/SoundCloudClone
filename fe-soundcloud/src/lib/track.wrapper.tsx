@@ -6,9 +6,9 @@ const TrackContext = createContext<ITrackContext | null>(null)
 
 export const TrackContextProvider = ({ children }: { children: React.ReactNode }) => {
     const initValue = {
-        id: 0,
-        genre: { id: 0, name: "", description: "" },
-        user: { id: 0, username: "", password: "", email: "", first_name: "", last_name: "", avatar: "", pk: 0 },
+        _id: '',
+        genre: { _id: '', name: "", description: "" },
+        user: { _id: '', username: "", password: "", email: "", first_name: "", last_name: "", avatar: "", pk: 0 },
         description: "",
         photo: "",
         title: "",

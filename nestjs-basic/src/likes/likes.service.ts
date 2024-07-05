@@ -10,6 +10,7 @@ import { Like, LikeDocument } from './schemas/like.schema';
 import { ITrack } from 'src/tracks/tracks.interface';
 import { InvalidIdException } from 'src/exceptions/invalid-id-format.exception';
 import mongoose from 'mongoose';
+import aqp from 'api-query-params';
 
 @Injectable()
 export class LikesService {
@@ -54,8 +55,39 @@ export class LikesService {
     }
   }
 
-  findAll() {
-    return `This action returns all likes`;
+  async findAll(currentPage, limit, qs, user: IUser) {
+    const { skip, sort, projection } = aqp(qs);
+
+    const filter = { user: user._id };
+    const offset = (+currentPage - 1) * (+limit);
+    const defaultLimit = +limit ? +limit : 10;
+    const totalItems = (await this.likeModel.find(filter)).length;
+    const totalPages = Math.ceil(totalItems / defaultLimit);
+
+    const results = await this.likeModel.find(filter)
+      .skip(offset)
+      .limit(defaultLimit)
+      .sort(sort as any)
+      .populate({
+        path: 'track',
+        select: {
+          title: 1,
+          photo: 1,
+          _id: 1
+        }
+      })
+      .select(projection as any)
+      .exec();
+
+    return {
+      meta: {
+        current: currentPage,
+        pageSize: limit,
+        pages: totalPages,
+        total: totalItems
+      },
+      results
+    };
   }
 
   async findOne(id: string) {

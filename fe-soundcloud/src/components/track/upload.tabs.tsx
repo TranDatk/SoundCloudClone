@@ -50,7 +50,7 @@ const UploadTabs = (props: IProps) => {
     const [trackUpload, setTrackUpload] = React.useState({
         fileName: "",
         percent: 0,
-        id: 0,
+        url: ''
     });
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {

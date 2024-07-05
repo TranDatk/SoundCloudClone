@@ -37,12 +37,12 @@ const CommentTrack = (props: IProps) => {
     const handleSubmit = async () => {
 
         const res = await sendRequest<IBackendRes<IComment>>({
-            url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/comment/`,
+            url: `${process.env.NEXT_PUBLIC_BACKEND_URL}comments/`,
             method: "POST",
             body: {
-                comment_text: yourComment,
+                commentText: yourComment,
                 moment: Math.round(wavesurfer?.getCurrentTime() ?? 0),
-                fk_tracks: track?._id,
+                track: track?._id,
                 user: session?.user._id
             },
 
@@ -89,8 +89,8 @@ const CommentTrack = (props: IProps) => {
                         style={{
                             height: 150, width: 150, borderRadius: "50%"
                         }}
-                        src={track?.user.avatar !== "" && track?.user.avatar !== null && track?.user.avatar !== undefined ?
-                            `${process.env.NEXT_PUBLIC_BACKEND_URL}${track?.user.avatar}` :
+                        src={track?.user?.avatar !== "" && track?.user?.avatar !== null && track?.user?.avatar !== undefined ?
+                            `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${track?.user?.avatar}` :
                             "/avatars-000184820148-9xr49w-t240x240.jpg"}
                     />
                     <h3>{session?.user?.email}</h3>
@@ -105,12 +105,12 @@ const CommentTrack = (props: IProps) => {
                                             height: 40, width: 40, borderRadius: "50%"
 
                                         }}
-                                        src={comment?.user.avatar !== "" && comment?.user.avatar !== null && comment?.user.avatar !== undefined ?
-                                            `${process.env.NEXT_PUBLIC_BACKEND_URL}${comment?.user.avatar}` :
+                                        src={comment?.user?.avatar !== "" && comment?.user?.avatar !== null && comment?.user?.avatar !== undefined ?
+                                            `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${comment?.user?.avatar}` :
                                             "/avatars-000184820148-9xr49w-t240x240.jpg"}
                                     />
                                     <div>
-                                        <div style={{ fontSize: "13px" }}>{comment?.user.username ?? comment?.user.email} at
+                                        <div style={{ fontSize: "13px" }}>{comment?.user?.username ?? comment?.user?.email} at
                                             <span style={{ cursor: "pointer" }}
                                                 onClick={() => handleJumpTrack(comment.moment)}
                                             >
@@ -118,12 +118,12 @@ const CommentTrack = (props: IProps) => {
                                             </span>
                                         </div>
                                         <div>
-                                            {comment.comment_text}
+                                            {comment.commentText}
                                         </div>
                                     </div>
                                 </Box>
                                 <div style={{ fontSize: "12px", color: "#999" }}>
-                                    {hasMounted && dayjs(comment.created_date).fromNow()}
+                                    {hasMounted && dayjs(comment?.createdAt).fromNow()}
                                 </div>
                             </Box>
                         )

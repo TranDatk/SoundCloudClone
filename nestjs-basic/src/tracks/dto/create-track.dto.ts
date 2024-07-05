@@ -21,9 +21,5 @@ export class CreateTrackDto {
 
     @IsMongoId()
     @IsNotEmpty()
-    user: mongoose.Schema.Types.ObjectId;
-
-    @IsMongoId()
-    @IsNotEmpty()
-    genre: mongoose.Schema.Types.ObjectId;
+    genre: string;
 }

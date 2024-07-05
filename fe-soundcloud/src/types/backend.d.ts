@@ -33,11 +33,11 @@ declare global {
     }
 
     interface IComment extends Itembase {
-        comment_text: string;
+        commentText: string;
         moment: number;
         user: IUser;
-        fk_tracks: ITrack;
-        created_date: string;
+        track: ITrack;
+        createdAt: string;
     }
 
     interface ILike extends Itembase {
@@ -50,7 +50,7 @@ declare global {
         title: string;
         description: string;
         status: boolean;
-        tracks: ITrack[];
+        track: ITrack[];
         user: IUser;
     }
 
@@ -79,7 +79,7 @@ declare global {
             pages: number;
             total: number;
         },
-        result: T[]
+        results?: T;
     }
 
     interface IShareTrack extends ITrack {

@@ -44,6 +44,14 @@ export class DatabasesService implements OnModuleInit {
                     $or: [
                         { apiPath: '/api/v1/likes', method: 'POST' },
                         { apiPath: '/api/v1/likes/check/:id', method: 'GET' },
+                        { apiPath: '/api/v1/comments', method: 'POST' },
+                        { apiPath: '/api/v1/likes', method: 'GET' },
+                        { apiPath: '/api/v1/files/upload', method: 'POST' },
+                        { apiPath: '/api/v1/tracks', method: 'POST' },
+                        { apiPath: '/api/v1/tracks', method: 'GET' },
+                        { apiPath: '/api/v1/playlists', method: 'POST' },
+                        { apiPath: '/api/v1/playlists', method: 'GET' },
+                        { apiPath: '/api/v1/playlists/:id', method: 'PATCH' },
                     ]
 
                 }).select("_id");
@@ -77,7 +85,8 @@ export class DatabasesService implements OnModuleInit {
                         gender: "MALE",
                         address: "VietNam",
                         role: adminRole._id,
-                        refreshToken: null
+                        refreshToken: null,
+                        avatar: 'anh1-1720166965307.jpg'
                     },
                     {
                         name: "I'm user 1",
@@ -87,7 +96,8 @@ export class DatabasesService implements OnModuleInit {
                         gender: "MALE",
                         address: "VietNam",
                         role: userRole._id,
-                        refreshToken: null
+                        refreshToken: null,
+                        avatar: 'anh1-1720166965307.jpg'
                     },
                     {
                         name: "I'm user 2",
@@ -97,7 +107,8 @@ export class DatabasesService implements OnModuleInit {
                         gender: "MALE",
                         address: "VietNam",
                         role: userRole._id,
-                        refreshToken: null
+                        refreshToken: null,
+                        avatar: 'anh1-1720166965307.jpg'
                     },
                 ]);
             }

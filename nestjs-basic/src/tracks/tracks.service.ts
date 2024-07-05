@@ -101,6 +101,11 @@ export class TracksService {
           }
         }
       )
+      .populate(
+        {
+          path: 'user',
+          select: { _id: 1, email: 1, avatar: 1 }
+        });;
   }
 
   async update(id: string, updateTrackDto: UpdateTrackDto, user: IUser) {

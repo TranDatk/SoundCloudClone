@@ -31,13 +31,13 @@ export default function MediaControlCard(props: IProp) {
         track._id !== null && (
             <Box sx={{ display: 'flex', alignItems: 'center', height: '30px', width: '100%', background: 'none' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', marginRight: '8px', width: '15%' }}>
-                    <img
+                    {track?.photo && <img
                         style={{ alignSelf: 'center' }}
                         src={constructPhotoUrl(track)}
                         alt=""
                         width={30}
                         height={30}
-                    />
+                    />}
                 </Box>
                 <Box sx={{
                     flex: '1 0 auto', height: 30, fontSize: '0.5rem', width: '85%',

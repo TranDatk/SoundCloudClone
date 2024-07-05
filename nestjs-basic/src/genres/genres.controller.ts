@@ -5,6 +5,7 @@ import { UpdateGenreDto } from './dto/update-genre.dto';
 import { ResponseMessage } from 'src/custom-decorators/response-message-decorator';
 import { User } from 'src/custom-decorators/parsing-user-decorator';
 import { IUser } from 'src/users/users.interface';
+import { Public } from 'src/custom-decorators/is-public-decorator';
 
 @Controller('genres')
 export class GenresController {
@@ -16,6 +17,7 @@ export class GenresController {
     return this.genresService.create(createGenreDto, user);
   }
 
+  @Public()
   @ResponseMessage('Fetch list genre')
   @Get()
   findAll() {

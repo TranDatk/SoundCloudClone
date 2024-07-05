@@ -21,10 +21,10 @@ const DetailTrackPage = async ({ params }: { params: { slug: string } }) => {
     })
 
     const resComments = await sendRequest<IBackendRes<IComment[]>>({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/comment/${id}/track-comments/`,
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}comments/${id}/fetch-comments`,
         method: "GET",
         nextOption: { cache: "no-store" }
-    })
+    });
 
     if (res.statusCode === 404) {
         notFound();

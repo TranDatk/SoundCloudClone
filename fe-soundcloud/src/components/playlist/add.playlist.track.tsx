@@ -32,7 +32,7 @@ const AddPlaylistTrack = (props: IProps) => {
     const router = useRouter();
     const { data: session } = useSession();
 
-    const [playlistId, setPlaylistId] = useState(0);
+    const [playlistId, setPlaylistId] = useState('');
     const [tracksId, setTracksId] = useState<string[]>([]);
 
     const theme = useTheme();
@@ -41,7 +41,7 @@ const AddPlaylistTrack = (props: IProps) => {
         if (reason && reason == "backdropClick")
             return;
         setOpen(false);
-        setPlaylistId(0);
+        setPlaylistId('');
         setTracksId([]);
     };
 
@@ -72,18 +72,17 @@ const AddPlaylistTrack = (props: IProps) => {
         tracks = tracks?.filter((item) => item);
         if (chosenPlaylist) {
             const res = await sendRequest<IBackendRes<any>>({
-                url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/playlisttracks/`,
-                method: "POST",
+                url: `${process.env.NEXT_PUBLIC_BACKEND_URL}playlists/${chosenPlaylist?._id}`,
+                method: "PATCH",
                 body: {
-                    "id": chosenPlaylist._id,
-                    "tracks": tracks
+                    "track": tracks
                 },
                 headers: {
                     Authorization: `Bearer ${session?.access_token}`,
                 }
             })
 
-            if (res.error === null) {
+            if (res?.data) {
                 toast.success("Thêm track vào playlist thành công!");
                 await sendRequest<IBackendRes<any>>({
                     url: `/api/revalidate`,
@@ -114,7 +113,7 @@ const AddPlaylistTrack = (props: IProps) => {
                             <Select
                                 value={playlistId}
                                 label="Playlist"
-                                onChange={(e) => setPlaylistId(e.target.value as number)}
+                                onChange={(e) => setPlaylistId(e.target.value)}
                             >
                                 {playlists.map(item => {
                                     return (

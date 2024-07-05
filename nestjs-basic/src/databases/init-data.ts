@@ -478,6 +478,82 @@ export const INIT_PERMISSIONS = [
         "updatedAt": "2023-06-15T06:59:31.898Z",
         "__v": 0
     },
+    {
+        "_id": "60f7b3f9ef283300155ae099",
+        "name": "Get list liked track of user",
+        "apiPath": "/api/v1/likes",
+        "method": "GET",
+        "module": "LIKES",
+        "createdBy": {
+            "_id": "6683b041ead26dd9855eb53a",
+            "email": "admin@gmail.com"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2023-06-15T09:12:51.974Z",
+        "updatedAt": "2023-06-15T09:12:51.974Z",
+        "__v": 0
+    },
+    {
+        "name": "Create a comment",
+        "apiPath": "/api/v1/comments",
+        "method": "POST",
+        "module": "COMMENTS",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2023-06-15T06:59:31.898Z",
+        "updatedAt": "2023-06-15T06:59:31.898Z",
+        "__v": 0
+    },
+    {
+        "name": "Create a playlist",
+        "apiPath": "/api/v1/playlists",
+        "method": "POST",
+        "module": "PLAYLISTS",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2023-06-15T06:59:31.898Z",
+        "updatedAt": "2023-06-15T06:59:31.898Z",
+        "__v": 0
+    },
+    {
+        "name": "Fetch list playlist",
+        "apiPath": "/api/v1/playlists",
+        "method": "GET",
+        "module": "PLAYLISTS",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2023-06-15T06:59:31.898Z",
+        "updatedAt": "2023-06-15T06:59:31.898Z",
+        "__v": 0
+    },
+    {
+        "name": "Update a playlist",
+        "apiPath": "/api/v1/playlists/:id",
+        "method": "PATCH",
+        "module": "PLAYLISTS",
+        "createdBy": {
+            "_id": "6684c50ca995464eae29594b",
+            "email": "admin@gmail.com"
+        },
+        "isDeleted": false,
+        "deletedAt": null,
+        "createdAt": "2023-06-15T06:59:31.898Z",
+        "updatedAt": "2023-06-15T06:59:31.898Z",
+        "__v": 0
+    },
 ]
 
 export const INIT_GENRES = [

@@ -286,7 +286,7 @@ const WaveTrack = (props: IProps) => {
                                     color: "white"
                                 }}
                                 >
-                                    {track.user.username}
+                                    {track?.user?.email}
                                 </div>
                             </div>
                         </div>
@@ -298,16 +298,16 @@ const WaveTrack = (props: IProps) => {
                                 {
                                     isReady && comments.map((comment) => {
                                         return (
-                                            <Tooltip key={`id=${comment._id}`} title={comment.comment_text} arrow>
+                                            <Tooltip key={`id=${comment._id}`} title={comment?.commentText} arrow>
                                                 <img
                                                     className={`${isReady && 'img-comments'}`}
                                                     onPointerMove={(e) => {
                                                         const hover = hoverRef.current;
-                                                        hover ? hover.style.width = calLeft(comment.moment + 3) : null;
+                                                        hover ? hover.style.width = calLeft(comment?.moment + 3) : null;
                                                     }}
                                                     key={`id_img=${comment._id}`}
-                                                    src={comment.user.avatar !== '' && comment.user.avatar !== null ?
-                                                        `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${comment.user.avatar}` :
+                                                    src={comment?.user?.avatar !== '' && comment?.user?.avatar !== null ?
+                                                        `${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${comment?.user?.avatar}` :
                                                         "avatars-000184820148-9xr49w-t240x240.jpg"}
                                                     alt="sa"
                                                     style={{

@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 const LikePage = async () => {
     const session = await getServerSession(authOptions);
 
-    const res = await sendRequest<IBackendRes<ITrack[]>>({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/like/`,
+    const res = await sendRequest<IBackendRes<IModelPaginate<ILike[]>>>({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}likes`,
         method: "GET",
         headers: {
             Authorization: `Bearer ${session?.access_token}`,
@@ -29,7 +29,7 @@ const LikePage = async () => {
         }
     })
 
-    const likes = res.data ?? [];
+    const likes = res?.data?.results ?? [];
 
     return (
         <Container>
@@ -38,20 +38,20 @@ const LikePage = async () => {
             </div>
             <Divider />
             <Box sx={{ mt: 3, display: "flex", gap: "20px", flexWrap: "wrap" }}>
-                {likes.map(track => {
+                {likes.map(like => {
                     return (
-                        <Box key={track._id}>
+                        <Box key={like._id}>
                             <img
                                 style={{ borderRadius: "3px" }}
                                 alt="avatar track"
-                                src={`${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${track?.photo}`}
+                                src={`${process.env.NEXT_PUBLIC_BACKEND_PUBLIC}${like?.track?.photo}`}
                                 height={200}
                                 width={200}
                             />
                             <div>
                                 <Link
                                     style={{ textDecoration: "none", color: "unset" }}
-                                    href={`/track/${convertSlugUrl(track.title)}-${track._id}.html?audio=${track.title}`}
+                                    href={`/track/${convertSlugUrl(like?.track?.title)}-${like?.track?._id}.html?audio=${like?.track?.title}`}
                                 >
                                     <span
                                         style={{
@@ -64,7 +64,7 @@ const LikePage = async () => {
 
                                         }}
                                     >
-                                        {track.title}
+                                        {like?.track?.title}
                                     </span>
                                 </Link>
                             </div>

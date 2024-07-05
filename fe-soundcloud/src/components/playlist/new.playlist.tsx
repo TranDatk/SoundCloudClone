@@ -39,19 +39,20 @@ const NewPlaylist = (props: any) => {
             return;
         }
         const res = await sendRequest<IBackendRes<IPlaylist>>({
-            url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/playlist/`,
+            url: `${process.env.NEXT_PUBLIC_BACKEND_URL}playlists`,
             method: "POST",
             body: {
                 title: title,
                 status: isPublic,
-                description: description
+                description: description,
+                track: []
             },
             headers: {
                 Authorization: `Bearer ${session?.access_token}`,
             }
         })
 
-        if (res.results) {
+        if (res?.data) {
             toast.success("Tạo mới playlist thành công!");
             setIsPublic(true);
             setTitle("");

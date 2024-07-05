@@ -18,13 +18,13 @@ const UploadPage = async () => {
     }
 
     const res = await sendRequest<IBackendRes<IGenre[]>>({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/genre/`,
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}genres/`,
         method: "GET",
     })
     return (
         <Container>
             <UploadTabs
-                genres={res.results ?? []}
+                genres={res?.data ?? []}
             />
         </Container>
     )

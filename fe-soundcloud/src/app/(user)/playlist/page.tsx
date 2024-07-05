@@ -25,29 +25,28 @@ const PlaylistPage = async ({ searchParams, }: { searchParams: { [key: string]: 
     const page = searchParams["page"] ?? "1";
     const session = await getServerSession(authOptions);
 
-    const resPlaylist = await sendRequest<IBackendRes<IPlaylist[]>>({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/playlist/`,
+    const resPlaylist = await sendRequest<IBackendRes<IModelPaginate<IPlaylist[]>>>({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}playlists`,
         method: "GET",
         headers: {
             Authorization: `Bearer ${session?.access_token}`,
         },
-        queryParams: { page: page },
+        queryParams: { current: page },
         nextOption: {
             next: { tags: ['playlist-by-user'] }
         }
     })
 
-    const resAllTrack = await sendRequest<IBackendRes<ITrack[]>>({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/tracks/`,
+    const resAllTrack = await sendRequest<IBackendRes<IModelPaginate<ITrack[]>>>({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}tracks`,
         method: "GET",
-        queryParams: { page: page },
+        queryParams: { current: page, pageSize: 5 },
         headers: {
             Authorization: `Bearer ${session?.access_token}`,
         }
     })
 
-    const playlists = resPlaylist?.results ?? [];
-
+    const playlists = resPlaylist?.data?.results ?? [];
     return (
         <Container sx={{ mt: 3, p: 3, background: "#f3f6f9", borderRadius: "3px" }}>
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -56,7 +55,7 @@ const PlaylistPage = async ({ searchParams, }: { searchParams: { [key: string]: 
                     <NewPlaylist />
                     <AddPlaylistTrack
                         playlists={playlists}
-                        tracks={resAllTrack?.results ?? []}
+                        tracks={resAllTrack?.data?.results ?? []}
                     />
                 </div>
             </Box>
@@ -73,7 +72,7 @@ const PlaylistPage = async ({ searchParams, }: { searchParams: { [key: string]: 
                                 </Box>
                             </AccordionSummary>
                             <AccordionDetails>
-                                {playlist?.tracks?.map((track: ITrack, index: number) => {
+                                {playlist?.track?.map((track: ITrack, index: number) => {
                                     return (
                                         <Fragment key={track._id}>
                                             {index === 0 && <Divider />}
@@ -82,7 +81,7 @@ const PlaylistPage = async ({ searchParams, }: { searchParams: { [key: string]: 
                                         </Fragment>
                                     )
                                 })}
-                                {playlist?.tracks?.length === 0 && <span>No data.</span>}
+                                {playlist?.track?.length === 0 && <span>No data.</span>}
                             </AccordionDetails>
                         </Accordion>
                     )

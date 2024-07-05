@@ -46,7 +46,7 @@ function LinearWithValueLabel(trackUpload: {
     trackUpload: {
         fileName: string;
         percent: number;
-        _id: string;
+        url: string;
     }
 }) {
 
@@ -73,7 +73,7 @@ interface IProps {
     trackUpload: {
         fileName: string;
         percent: number;
-        _id: string;
+        url: string;
     },
     genres: IGenre[],
     setValue: (v: number) => void;
@@ -92,7 +92,6 @@ interface INewTrack {
 const Step2 = (props: IProps) => {
     const toast = useToast();
     const { genres, trackUpload, setValue } = props;
-    const [fileSelected, setFileSelected] = React.useState<File | null>(null);
     const { data: session } = useSession();
     const [infor, setInfor] = useState<INewTrack>({
         genre: "",
@@ -124,10 +123,8 @@ const Step2 = (props: IProps) => {
                 const file = event.files[0];
                 if (file.type.startsWith('image/')) {
                     const formData = new FormData();
-                    setFileSelected(file);
-                    formData.append("photo", file, file.name);
-                    formData.append("id", trackUpload._id.toString())
-                    if (trackUpload._id !== null) {
+                    formData.append("file", file, file.name);
+                    if (trackUpload?.url !== null) {
                         handleFileUpload(formData);
                     } else {
                         toast.error("Vui lòng đợi quá trình tải âm thanh hoàn thành")
@@ -164,16 +161,16 @@ const Step2 = (props: IProps) => {
 
     const handleFileUpload = async (formData: FormData) => {
         try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tracks/`, formData, {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}files/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${session?.access_token}`,
-                    "target-type": "photo",
                 },
             })
+            console.log(res?.data?.data?.fileName)
             setInfor({
                 ...infor,
-                photo: res.data.results.photo ?? ''
+                photo: res?.data?.data?.fileName ?? ''
             })
         } catch (error) {
             //@ts-ignore
@@ -209,16 +206,17 @@ const Step2 = (props: IProps) => {
         }
 
         const resPop = await sendRequest<IBackendRes<ITrack>>({
-            url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/tracks/`,
+            url: `${process.env.NEXT_PUBLIC_BACKEND_URL}tracks/`,
             method: "POST",
             headers: {
                 'Authorization': `Bearer ${session?.access_token}`,
             },
             body: {
-                id: trackUpload._id,
+                url: trackUpload.url,
                 title: infor.title,
                 description: infor.description,
                 genre: infor.genre,
+                photo: infor.photo
             }
         })
         if (resPop.error) {
@@ -240,7 +238,7 @@ const Step2 = (props: IProps) => {
         <div>
             <div>
                 <div>
-                    {props.trackUpload.fileName}
+                    {trackUpload?.url}
                 </div>
                 <LinearWithValueLabel
                     trackUpload={trackUpload}
@@ -259,12 +257,11 @@ const Step2 = (props: IProps) => {
                 >
                     <div style={{ height: 250, width: 250, background: "#ccc" }}>
                         {infor.photo !== '' && (
-                            <Image
-                                src={process.env.NEXT_PUBLIC_BACKEND_PUBLIC + (infor.photo).substring(1) || ""}
+                            <img
+                                src={process.env.NEXT_PUBLIC_BACKEND_PUBLIC + (infor.photo) || ""}
                                 width={250}
                                 height={250}
                                 alt={infor.title}
-                                quality={80}
                             />
                         )}
 

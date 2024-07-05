@@ -14,12 +14,12 @@ interface IProps {
     setTrackUpload: React.Dispatch<React.SetStateAction<{
         fileName: string;
         percent: number;
-        _id: string;
+        url: string;
     }>>;
     trackUpload: {
         fileName: string;
         percent: number;
-        _id: string;
+        url: string;
     }
 }
 
@@ -33,15 +33,13 @@ const Step1 = (props: IProps) => {
             if (audio.type.startsWith('audio/')) {
                 props.setValue(1);
                 const formData = new FormData();
-                formData.append('url', audio);
-                formData.append("is_active", "true");
+                formData.append('file', audio);
 
                 try {
-                    const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tracks/`, formData, {
+                    const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}files/upload`, formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                             'Authorization': `Bearer ${session?.access_token}`,
-                            "target-type": "audio",
                         },
                         onUploadProgress: (progressEvent: AxiosProgressEvent) => {
                             let percentCompleted = Math.floor((progressEvent.loaded * 100) / progressEvent.total!);
@@ -52,11 +50,13 @@ const Step1 = (props: IProps) => {
                             });
                         }
                     });
-                    if (res) {
+                    if (res?.data) {
                         props.setTrackUpload((prevState: any) => ({
                             ...prevState,
-                            id: res.data.results._id ?? 0
+                            url: res?.data?.data?.fileName
                         }));
+                    } else {
+                        toast.error("Lỗi khi tải âm thanh")
                     }
                 } catch (error) {
                     //@ts-ignore

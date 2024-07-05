@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { LikesService } from './likes.service';
 import { CreateLikeDto } from './dto/create-like.dto';
 import { UpdateLikeDto } from './dto/update-like.dto';
@@ -16,9 +16,15 @@ export class LikesController {
     return this.likesService.create(createLikeDto, user);
   }
 
+  @ResponseMessage('Fetch list like of user')
   @Get()
-  findAll() {
-    return this.likesService.findAll();
+  findAll(
+    @Query("current") currentPage: string,
+    @Query("pageSize") limit: string,
+    @Query() qs: string,
+    @User() user: IUser
+  ) {
+    return this.likesService.findAll(+currentPage, +limit, qs, user);
   }
 
   @Get(':id')
@@ -28,8 +34,8 @@ export class LikesController {
 
   @ResponseMessage('Check is user liked the track')
   @Get('check/:id')
-  checkTrackLike(@Param('id') id: string) {
-    return this.likesService.checkTrackLike(id);
+  checkTrackLike(@Param('id') trackId: string) {
+    return this.likesService.checkTrackLike(trackId);
   }
 
   @Patch(':id')

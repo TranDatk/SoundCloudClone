@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Xác nhận tài khoản của bạn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .header img {
+            max-width: 100px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .verification-code {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 12px;
+            color: #777777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://soundcloudclone-nest.onrender.com/images/soundcloud_1322046.png" alt="Sound Cloud Clone">
+        </div>
+        <div class="content">
+            <h1>Chào {{name}},</h1>
+            <p>Cảm ơn bạn đã đăng ký tài khoản tại trang web của chúng tôi.</p>
+            <p>Mã xác nhận tài khoản của bạn là:</p>
+            <div class="verification-code">{{verificationCode}}</div>
+            <p>Vui lòng nhập mã này để xác nhận tài khoản của bạn.</p>
+            <p>Nếu bạn không yêu cầu mã này, vui lòng bỏ qua email này.</p>
+        </div>
+        <div class="footer">
+            <p>© 2024 Sound Cloud Clone. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

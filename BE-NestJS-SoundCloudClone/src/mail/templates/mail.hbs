@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            background-color: #ff4500;
+            color: #fff;
+            padding: 10px 0;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .track {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .track:last-child {
+            border-bottom: none;
+        }
+
+        .track img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .track-details {
+            flex-grow: 1;
+        }
+
+        .track-details h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #ff4500;
+        }
+
+        .track-details p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #ff4500;
+            color: #fff;
+            border-radius: 0 0 8px 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Our Music Journey Starts Here</h1>
+        </div>
+        <p>Hi {{receiver}},</p>
+        <p>Check out the latest tracks from your favorite author!</p>
+        {{#each tracks}}
+        <div class="track">
+            <img src="{{this.photo}}" alt="Track Photo">
+            <div class="track-details">
+                <h2>{{this.title}}</h2>
+                <p>By: {{this.name}}</p>
+                <p>Views: {{this.view}}</p>
+            </div>
+        </div>
+        {{/each}}
+        <div class="footer">
+            <p>Thank you for being with us!</p>
+            <p>Sound Cloud Clone Team</p>
+        </div>
+    </div>
+</body>
+
+</html>

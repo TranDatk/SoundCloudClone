@@ -1,0 +1,143 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+jspm_packages/
+
+# Build directories
+dist/
+build/
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment variables file
+.env
+.env.*
+
+# TypeScript cache
+*.tsbuildinfo
+
+# IDE files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore temporary files from editors
+*.swp
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+.metadata/
+*.tmp
+*.bak
+*.backup
+*.swp
+*.idea/
+
+# Ignore generated files from Swagger
+swagger/
+
+# Ignore generated files from Prisma
+prisma/.env
+prisma/migrations/
+
+# Ignore generated files from Docker
+docker-compose.override.yml
+docker-compose.yml
+Dockerfile
+
+# Ignore generated files from PM2
+pm2-log.txt
+pids
+pms.json
+
+# Ignore generated files from Heroku
+Procfile
+Procfile.windows
+*.buildpacks
+*.env.example
+
+# Ignore generated files from Firebase
+.firebase/
+
+# Ignore generated files from Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Ignore generated files from Serverless
+.serverless/
+.webpack/
+
+# Ignore other build artifacts
+*.orig
+*.rej
+*.patch
+*.diff
+
+# Ignore specific configuration files
+config/local.js
+config/local.json
+config/env/
+
+# Ignore Python files if any Python scripts are used
+*.py[cod]
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore Yarn integrity file
+.yarn-integrity
+
+# Ignore miscellaneous
+*.log
+*.pot
+*.mo
+*.pid
+*.seed
+*.pid.lock
+*.pidfile
+*.sock
+
+# Ignore temporary files from Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Ignore temporary files from VS Code
+.history/
+package-lock.json
+
+#Ignore documentation
+documentation

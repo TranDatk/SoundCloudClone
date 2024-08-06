@@ -48,8 +48,6 @@ This project is a full-stack implementation of a Sound Cloud Clone, built using 
 - **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
 - **JWT (JSON Web Tokens)**: For stateless authentication.
 - **Passport**: Authentication middleware for Node.js.
-  - **Passport-GitHub**: For GitHub login.
-  - **Passport-Google-OAuth20**: For Google login.
 - **Node Mailer**: For sending email confirmations.
 - **PayOS**: For payment processing integration.
 - **MongoDB - Mongoose**: A library that creates a connection between MongoDB and the Node.js.

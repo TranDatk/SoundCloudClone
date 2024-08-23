@@ -103,3 +103,5 @@ This project is a full-stack implementation of a Sound Cloud Clone, built using 
 - **NextAuth.js**: Authentication for Next.js.
 - **Wavesurfer.js**: Navigate and manipulate audio waveforms.
 - **PayOS**: Payment processing integration.
+
+![Alt](https://repobeats.axiom.co/api/embed/dd97cae429a6f3309d5bb56dfe4bc85ee473ae81.svg "Repobeats analytics image")
